@@ -5,3 +5,5 @@ target
 orient-plugins
 backup
 databases
+.idea
+*.iml
