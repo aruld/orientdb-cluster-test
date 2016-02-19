@@ -39,7 +39,7 @@ public class Database {
 	public void startOrientServer() throws Exception {
 		String orientdbHome = new File("").getAbsolutePath();
 		System.setProperty("ORIENTDB_HOME", orientdbHome);
-		createDatabase();
+//		createDatabase();
 		OServer server = OServerMain.create();
 
 		server.startup(getOrientServerConfig());
