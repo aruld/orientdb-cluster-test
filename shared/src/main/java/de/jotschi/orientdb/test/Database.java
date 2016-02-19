@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 
+import com.orientechnologies.orient.core.db.document.ODatabaseDocumentTx;
+import com.orientechnologies.orient.core.exception.OStorageException;
 import org.apache.commons.io.IOUtils;
 
 import com.orientechnologies.orient.server.OServer;
@@ -37,6 +39,7 @@ public class Database {
 	public void startOrientServer() throws Exception {
 		String orientdbHome = new File("").getAbsolutePath();
 		System.setProperty("ORIENTDB_HOME", orientdbHome);
+		createDatabase();
 		OServer server = OServerMain.create();
 
 		server.startup(getOrientServerConfig());
@@ -44,6 +47,22 @@ public class Database {
 		manager.config(server);
 		server.activate();
 		manager.startup();
+	}
+
+	private void createDatabase() {
+		ODatabaseDocumentTx database = null;
+		try {
+			database = new ODatabaseDocumentTx("plocal:" + new File("databases/db_testdb").getAbsolutePath()).open("admin", "admin");
+		} catch (OStorageException e) {
+			// database does not exist, create one
+			try {
+				database = new ODatabaseDocumentTx("plocal:/databases/db_testdb").create();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		if (database != null) database.close();
+
 	}
 
 }
