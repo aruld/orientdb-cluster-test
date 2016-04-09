@@ -27,7 +27,7 @@ public class OrientDBClusterMasterTest extends AbstractClusterTest {
       user.save();
       i++;
       System.out.println("Count: " + database.countClass("User"));
-      Thread.sleep(500);
+      Thread.sleep(5000);
     }
   }
 }
