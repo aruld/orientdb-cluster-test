@@ -23,8 +23,8 @@
                 <multicast-port>2434</multicast-port>
             </multicast>
             <tcp-ip enabled="true">
-                <member>192.168.161.41:2434</member>
-                <member>192.168.197.124:2434</member>
+                <member>192.168.29.207:2434</member>
+                <member>192.168.29.216:2434</member>
             </tcp-ip>
         </join>
     </network>
