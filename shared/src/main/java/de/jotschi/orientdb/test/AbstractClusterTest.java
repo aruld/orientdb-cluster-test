@@ -8,11 +8,14 @@ public class AbstractClusterTest {
 		db = new Database(name);
 
 		// 1. Start the orient server
-		Runnable t = () -> {
-			try {
-				db.startOrientServer();
-			} catch (Exception e) {
-				e.printStackTrace();
+		Runnable t = new Runnable() {
+			@Override
+			public void run() {
+				try {
+					db.startOrientServer();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		};
 		new Thread(t).start();
