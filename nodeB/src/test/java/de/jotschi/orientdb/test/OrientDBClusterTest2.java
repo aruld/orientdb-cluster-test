@@ -1,27 +1,26 @@
 package de.jotschi.orientdb.test;
 
-import java.io.File;
-
+import com.orientechnologies.orient.core.db.document.ODatabaseDocumentTx;
 import org.junit.Test;
 
-import com.tinkerpop.blueprints.impls.orient.OrientGraphFactory;
-import com.tinkerpop.blueprints.impls.orient.OrientGraphNoTx;
+import java.io.File;
 
 public class OrientDBClusterTest2 extends AbstractClusterTest {
 
-	private final String nodeName = "nodeB";
+  private final String nodeName = "slave";
 
-	@Test
-	public void testCluster() throws Exception {
-		start(nodeName);
-		System.in.read();
-		OrientGraphFactory factory = new OrientGraphFactory("plocal:" + new File("databases/GratefulDeadConcerts").getAbsolutePath());
-		while (true) {
-			OrientGraphNoTx graph = factory.getNoTx();
-			System.out.println("Count: " + graph.countVertices());
-			Thread.sleep(1500);
-			graph.shutdown();
-		}
+  @Test
+  public void testCluster() throws Exception {
+    start(nodeName);
+//    System.in.read();
+    System.out.println("Sleeping for 30s, giving time for nodes to sync up");
+    Thread.sleep(30000);
+    ODatabaseDocumentTx database = new ODatabaseDocumentTx("plocal:" + new File("databases/userdb").getAbsolutePath()).open("admin", "admin");
+    while (true) {
+      long count = database.countClass("User");
+      System.out.println("Count: " + count);
+      Thread.sleep(1500);
+    }
 
-	}
+  }
 }
