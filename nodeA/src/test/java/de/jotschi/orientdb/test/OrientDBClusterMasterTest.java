@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import java.io.File;
 
-public class OrientDBClusterTest extends AbstractClusterTest {
+public class OrientDBClusterMasterTest extends AbstractClusterTest {
 
   private final String nodeName = "master";
 
