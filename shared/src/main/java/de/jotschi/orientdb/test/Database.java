@@ -28,7 +28,7 @@ public class Database {
 		StringWriter writer = new StringWriter();
 		IOUtils.copy(configIns, writer, StandardCharsets.UTF_8);
 		String configString = writer.toString();
-		configString = configString.replaceAll("%PLUGIN_DIRECTORY%", "orient-plugins");
+//		configString = configString.replaceAll("%PLUGIN_DIRECTORY%", "orient-plugins");
 		configString = configString.replaceAll("%CONSOLE_LOG_LEVEL%", "finest");
 		configString = configString.replaceAll("%FILE_LOG_LEVEL%", "fine");
 		configString = configString.replaceAll("%NODENAME%", nodeName);
